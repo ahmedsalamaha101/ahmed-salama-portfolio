@@ -1,0 +1,490 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #1e3a8a; /* Dark blue to match the suit and background */
+  --secondary: #10b981; /* Light green to match the "ima" logo */
+  --accent: #dc2626; /* Red to match the tie */
+  --background: #ffffff;
+  --text: #1a1a2e;
+  --transition-duration: 0.3s;
+  --border-radius: 0.5rem;
+}
+
+.dark {
+  --primary: #3b82f6; /* Lighter blue for dark mode */
+  --secondary: #34d399; /* Lighter green for dark mode */
+  --accent: #f87171; /* Lighter red for dark mode */
+  --background: #0f172a;
+  --text: #f1f5f9;
+}
+
+/* Base styles */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    color: var(--text);
+    background: var(--background);
+    font-feature-settings: "rlig" 1, "calt" 1;
+    transition: background-color var(--transition-duration) ease, color var(--transition-duration) ease;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    text-transform: capitalize;
+    line-height: 1.2;
+  }
+
+  /* Apply capitalization to important text */
+  .card-title,
+  .section-heading,
+  label,
+  select option,
+  button,
+  .currency-name {
+    text-transform: capitalize;
+  }
+
+  /* Focus styles for accessibility */
+  :focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
+
+  /* Selection styles */
+  ::selection {
+    background-color: var(--primary);
+    color: white;
+  }
+}
+
+/* RTL Support */
+[dir="rtl"] .nav-link.active::after {
+  right: 0;
+  left: auto;
+}
+
+[dir="rtl"] .section-title::after {
+  right: 0;
+  left: auto;
+}
+
+[dir="rtl"] .experience-timeline {
+  border-right: 2px solid var(--primary);
+  border-left: none;
+  padding-right: 2rem;
+  padding-left: 0;
+}
+
+[dir="rtl"] .experience-dot {
+  right: -9px;
+  left: auto;
+}
+
+/* Component styles */
+@layer components {
+  .nav-link {
+    @apply relative px-3 py-2 transition-colors hover:text-primary capitalize;
+  }
+
+  .nav-link.active {
+    @apply text-primary;
+  }
+
+  .nav-link.active::after {
+    content: "";
+    @apply absolute bottom-0 left-0 w-full h-1 bg-primary;
+    animation: fadeIn 0.3s ease-out forwards;
+  }
+
+  .section-title {
+    @apply text-2xl font-bold mb-6 relative inline-block capitalize;
+  }
+
+  .section-title::after {
+    content: "";
+    @apply absolute bottom-0 left-0 w-16 h-1 bg-primary;
+    animation: scaleIn 0.5s ease-out forwards;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-white px-6 py-3 rounded-md flex items-center justify-center gap-2 transition-all hover:bg-opacity-90 hover:shadow-md capitalize;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary text-white px-6 py-3 rounded-md flex items-center justify-center gap-2 transition-all hover:bg-opacity-90 hover:shadow-md capitalize;
+  }
+
+  .btn-accent {
+    @apply bg-accent text-white px-6 py-3 rounded-md flex items-center justify-center gap-2 transition-all hover:bg-opacity-90 hover:shadow-md capitalize;
+  }
+
+  /* Card styles with improved hover effects */
+  .card {
+    @apply bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition-all duration-300;
+  }
+
+  .card-hover {
+    @apply hover:shadow-lg hover:-translate-y-1;
+  }
+
+  /* Form element styles */
+  .form-input {
+    @apply w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-primary dark:bg-gray-800 dark:text-white transition-colors;
+  }
+
+  .form-select {
+    @apply w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-primary dark:bg-gray-800 dark:text-white transition-colors;
+  }
+
+  .form-checkbox {
+    @apply h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded transition-colors;
+  }
+
+  .form-label {
+    @apply block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1;
+  }
+}
+
+/* Animation classes */
+@layer utilities {
+  .fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  .fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  .scale-in {
+    animation: scaleIn 0.5s ease-out forwards;
+  }
+
+  .slide-in-right {
+    animation: slideInRight 0.5s ease-out forwards;
+  }
+
+  .slide-in-left {
+    animation: slideInLeft 0.5s ease-out forwards;
+  }
+
+  .bounce-in {
+    animation: bounceIn 0.6s ease-out forwards;
+  }
+
+  /* Hover effect utilities */
+  .hover-lift {
+    @apply transition-transform duration-300 hover:-translate-y-1;
+  }
+
+  .hover-scale {
+    @apply transition-transform duration-300 hover:scale-105;
+  }
+
+  .hover-glow {
+    @apply transition-shadow duration-300 hover:shadow-lg hover:shadow-primary/20;
+  }
+}
+
+/* Keyframe animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Certification timeline hover effects */
+.certification-image {
+  transition: transform 0.3s ease;
+}
+
+.certification-image:hover {
+  transform: scale(1.05);
+}
+
+.certification-point {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.certification-point:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 15px rgba(var(--primary-rgb), 0.5);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Dark mode scrollbar */
+.dark ::-webkit-scrollbar-track {
+  background: #1e293b;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #3b82f6;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #60a5fa;
+}
+
+/* Achievements ticker animation */
+.achievements-ticker {
+  animation: ticker 20s linear infinite;
+  white-space: nowrap;
+}
+
+@keyframes ticker {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Loading skeleton animation */
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.skeleton-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Responsive font sizes */
+@media (max-width: 640px) {
+  h1,
+  .h1 {
+    font-size: 2rem !important;
+  }
+  h2,
+  .h2 {
+    font-size: 1.75rem !important;
+  }
+  h3,
+  .h3 {
+    font-size: 1.5rem !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    font-size: 12pt;
+    color: #000;
+    background: #fff;
+  }
+
+  a {
+    text-decoration: none;
+    color: #000;
+  }
+
+  .page-break {
+    page-break-before: always;
+  }
+}
+
+/* Language-specific font settings */
+html[lang="ar"] {
+  font-family: "Tajawal", "Inter", sans-serif;
+}
+
+html[lang="ru"] {
+  font-family: "Roboto", "Inter", sans-serif;
+}
+
+html[lang="de"],
+html[lang="pl"] {
+  font-family: "Inter", sans-serif;
+}
+
+/* Language-specific text adjustments */
+html[lang="ar"] .text-direction-aware,
+html[lang="ar"] .rtl-aware {
+  direction: rtl;
+  text-align: right;
+}
+
+html[lang="ar"] .flip-in-rtl {
+  transform: scaleX(-1);
+}
+
+/* Language indicator */
+.language-indicator {
+  position: relative;
+}
+
+.language-indicator::after {
+  content: attr(data-lang);
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  font-size: 10px;
+  background-color: var(--primary);
+  color: white;
+  padding: 2px 4px;
+  border-radius: 4px;
+  opacity: 0.8;
+}
+
+/* Improved accessibility focus styles */
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Improved image placeholders */
+.image-placeholder {
+  background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s linear infinite;
+}
+
+.dark .image-placeholder {
+  background: linear-gradient(110deg, #2a2a2a 8%, #3a3a3a 18%, #2a2a2a 33%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s linear infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Currency converter specific styles */
+.currency-name {
+  text-transform: capitalize;
+}
+
+/* Improved button styles with feedback */
+.btn-primary:active,
+.btn-secondary:active,
+.btn-accent:active {
+  transform: scale(0.98);
+}
+
+/* Improved focus visible styles for keyboard navigation */
+.focus-visible:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(30, 58, 138, 0.3);
+}
